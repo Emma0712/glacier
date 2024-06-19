@@ -1,15 +1,14 @@
-
 h1 {
-   color: rgb(252, 255, 255); 
-   font-family: "Playwrite ES", cursive;
-   background: linear-gradient(45deg, rgb(40, 27, 160), rgb(48, 195, 221) 75%, rgb(29, 253, 216));
-   font-size: 2em;
+    color: rgb(252, 255, 255);
+    font-family: "Playwrite ES", cursive;
+    background: linear-gradient(45deg, rgb(40, 27, 160), rgb(48, 195, 221) 75%, rgb(29, 253, 216));
+    font-size: 2em;
 }
 
 p {
     font-family: "Dosis", sans-serif;
     font-size: 1.1em;
-    color:rgb(20, 15, 59)
+    color: rgb(20, 15, 59)
 }
 
 h2 {
@@ -21,8 +20,9 @@ h2 {
 ul {
     font-family: "Dosis", sans-serif;
     font-size: 1.1em;
-    color:rgb(20, 15, 59)
+    color: rgb(20, 15, 59)
 }
+
 #menu {
     width: 280px;
     height: 140px;
@@ -31,44 +31,46 @@ ul {
     padding-left: 10px;
     padding-right: 10px;
     box-shadow: 1px 1px 2px black;
-    
+    grid-column: 1;
+
+    grid-row: 2 / span 3;
 }
-  html{
-    background: linear-gradient(45deg, rgb(255, 255, 255), rgb(230, 244, 247) 75%, rgb(255, 255, 255)); 
-  }
+
+html {
+    background: linear-gradient(45deg, rgb(255, 255, 255), rgb(230, 244, 247) 75%, rgb(255, 255, 255));
+}
 
 div {
     border-radius: 20px;
 }
 
-header{
+header {
     margin-bottom: -10px;
-    
-
+    grid-row: 1;
+    grid-column: 1 / span 2;
 }
 
 body {
     width: 900px;
-    margin:auto;
+    margin: auto;
     display: grid;
-  
-    
-    
+    grid-template-columns: 320px 1fr;
+    grid-template-rows: auto 1fr auto;
 }
 
-footer{
+footer {
     margin-top: 30px;
     padding: 40px;
     text-align: center;
     background: rgb(5, 24, 65);
     color: white;
-    
+
 }
 
-footer p{
+footer p {
     color: white;
 }
 
-img{
+img {
     width: 100%;
 }
