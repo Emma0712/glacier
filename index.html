@@ -11,6 +11,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playwrite+ES:wght@100..400&display=swap" rel="stylesheet">
   <link href="https://fonts.bunny.net/css?family=abeezee:400" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -33,6 +36,8 @@
 
     <p>Les glaciers sont une énorme masse de glace constituée d'une grande quantité de neige. Leur formation prend
       beaucoup de temps, jusqu'à 30000 ans pour les plus gros d'entre eux.</p>
+    <div id="map"></div>
+
     <h2>Le glacier de vallée</h2>
     <img alt="image glacier" src="https://www.worldatlas.com/r/w1200-q80/upload/e3/51/c9/shutterstock-548467810.jpg">
     <p>Ce sont des rivières de glace formées dans les parties les plus élevées des chaînes de montagnes, où la neige
@@ -67,12 +72,17 @@
       <li>les glaciers renferment des particules d'air et d'eau qui ont été formées il y a plusieurs milliers d'années.
         Leur étude par les scientifiques permet d'avancer sur la compréhension de notre planète et ses
         <strong>changements
-          climatiques.</strong> </li>
+          climatiques.</strong>
+      </li>
     </ul>
   </div>
   <footer>
     <p>GRANDVUILLEMIN Emma - 2024</p>
   </footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="code.js"></script>
+
 </body>
 
 </html>
