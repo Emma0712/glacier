@@ -3,17 +3,50 @@
   <head>
     <meta charset="UTF-8">
     <title>Glacier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+ES:wght@100..400&display=swap" rel="stylesheet">
+    <link href="https://fonts.bunny.net/css?family=abeezee:400" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
+  <header><h1>Formulaire</h1></header>
     <div id="menu">
       <ul>
-        <li><a href="index.html" title="glaciers menacés"> Page d'acceuil</a></li>
+        <li><a href="index.html" title="page d accueil"> Page d'accueil</a></li>
+        <li><a href="encoreglacier.html" title="Catastrophes climatiques"> Catastrophes Climatiques</a></li>
         <li><a href="glacier.html" title="glaciers menacés"> Formulaire</a></li>
         <li><a href="https://fr.heidisevestre.com/" title="glaciologue"> Dr Heidi Sevestre, Glaciologue</a></li>
-        <li><a href="https://www.nationalgeographic.fr/environnement/2020/07/les-glaciers-des-pyrenees-pourraient-disparaitre-avant-2050" title="nationalgeographic"> National Geographic</a> </li>
       </ul>
     </div>
-    <h1>Formulaire</h1>
+    <form action="page.php" method="get">
+    </form>
     <h2>Informations personnelles</h2>
+    <fieldset>
+      Nom
+      <input type="text" name="nom">
+      Prenom
+      <input type="text" name="prenom">
+      Âge
+      <select name="age">
+        <option value="20">0-20 ans</option>
+        <option value="40" selected>21-40 ans</option>
+        <option value="60">41-60 ans</option>
+        <option value="80">61-80 ans</option>
+      </select>
+    </fieldset>
+    <h2>Compte à créer</h2>
+    <fieldset>
+    Login
+    <input type="text" name="login">
+    Password
+    <input type="password" name="password">
+    <p>S'abonner à la newsletter: 
+      <label>Oui<input type="radio" name="news" value="1"></label>
+<label>Non<input type="radio" name="news" value="0"></label>
+    </p>
+    <input type="submit" name="envoi" value="Validation">
+    </fieldset>
+    <footer><p>GRANDVUILLEMIN Emma</p></footer>
   </body>
 </html>
