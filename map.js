@@ -4,89 +4,110 @@ const map = L.map('map').setView([47.29, 2.77], 5);
 
 // add orthophotos layer
 
-const layer = "ORTHOIMAGERY.ORTHOPHOTOS";
-const format = "image/jpeg";
-
-const layerAncien = "ORTHOIMAGERY.ORTHOPHOTOS.1950-1965";
-const formatAncien = "image/png";
-
 L.tileLayer(
-    "https://data.geopf.fr/wmts?" +
-    "&REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0" +
-    "&STYLE=normal" +
-    "&TILEMATRIXSET=PM" +
-    "&FORMAT=" + format +
-    "&LAYER=" + layer +
-    "&TILEMATRIX={z}" +
-    "&TILEROW={y}" +
-    "&TILECOL={x}",
-    {
-        minZoom: 0,
-        maxZoom: 19,
-        attribution: "IGN-F/Geoportail",
-        tileSize: 256 // les tuiles du Géooportail font 256x256px
-    }
+  "https://data.geopf.fr/wmts?" +
+  "&REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0" +
+  "&STYLE=normal" +
+  "&TILEMATRIXSET=PM" +
+  "&FORMAT=image/jpeg" +
+  "&LAYER=ORTHOIMAGERY.ORTHOPHOTOS" +
+  "&TILEMATRIX={z}" +
+  "&TILEROW={y}" +
+  "&TILECOL={x}",
+  {
+    minZoom: 0,
+    maxZoom: 18,
+    attribution: "IGN-F/Geoportail",
+    tileSize: 256 // les tuiles du Géooportail font 256x256px
+  }
 ).addTo(map);
 
 // load geojson data
 // L.geoJSON(GEOPHOTO_DATA).addTo(map);
 let photos = [];
-let coordinates = [];
+let positions = [];
 L.geoJSON(GEOPHOTO_DATA, {
-    onEachFeature: (feature) => {
-        console.log(feature);
-        const photo = feature.properties.photo;
-        const coordinate = [
-            feature.geometry.coordinates[1],
-            feature.geometry.coordinates[0],
-        ];
-        if (photo) {
-            photos.push(photo);
-            coordinates.push(coordinate);
-        }
+  onEachFeature: (feature) => {
+    const photo = feature.properties.photo;
+    const position = feature.geometry.coordinates;
+    if (photo && position) {
+
+      photos.push(photo);
+
+      positions.push([
+        position[1],
+        position[0]
+      ]);
+
     }
+  }
 });
 
-// console.log(photos);
+// console.log(photos, positions);
 
-
+let pointClicked;
 
 map.on('click', (event) => {
-    console.log('click', event, event.latlng);
-    var marker = L.marker(selectedCoordinates).addTo(map);
 
-    const coordinateClick = [event.latlng.lat, event.latlng.lng];
-    var markerClick = L.circle(coordinateClick, { color: 'red', radius: 10 }).addTo(map);
+  // solution
+  pointClicked = [event.latlng.lat, event.latlng.lng];
 
-    const latlngs = [selectedCoordinates, coordinateClick];
+  L.circle(pointClicked, {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 10
+  }).addTo(map);
+  L.marker(selectedPosition).addTo(map);
 
-    let polyline = L.polyline(latlngs, { color: 'red' }).addTo(map);
+  const line = L.polyline([pointClicked, selectedPosition], {
+    color: 'red',
+  }).addTo(map);
+  // map.fitBounds(line.getBounds());
 
-    nouveauTirage();
+  map.flyTo(selectedPosition, 16);
+
+  // compute point
+  buildScore(pointClicked, selectedPosition);
+
+  // refresh image
+  newTirage();
 });
 
+const buildScore = (pointA, pointB) => {
+  let distance = map.distance(pointA, pointB);
+  distance = Math.round(distance);
 
-let tirage;
-let selectedPhoto;
-let selectedCoordinates;
+  const allImages = document.getElementById('photos');
+  const score = document.createElement('p');
+  score.innerText = new Intl.NumberFormat('fr-FR').format(distance) + 'm';
+  allImages.firstChild.appendChild(score);
 
-
-let listephoto = document.getElementById("photos");
-
-const nouveauTirage = () => {
-
-    tirage = Math.random() * (photos.length - 1)
-    tirage = Math.round(tirage);
-
-    selectedPhoto = photos[tirage];
-    selectedCoordinates = coordinates[tirage];
-    console.log(selectedPhoto, selectedCoordinates);
-
-    const image = document.createElement('img');
-    image.src = selectedPhoto;
-    image.classList.add('photo-choisie');
-    listephoto.appendChild(image);
+  console.log('buildScore', distance, pointA, pointB);
 }
 
-nouveauTirage();
 
+
+let tirage, selectedPhoto, selectedPosition;
+
+const newTirage = () => {
+  tirage = Math.random() * (photos.length - 1)
+  tirage = Math.round(tirage);
+
+  selectedPhoto = photos[tirage];
+
+  selectedPosition = positions[tirage];
+
+  console.log('newTirage', selectedPhoto, selectedPosition);
+
+  // add photo
+  const imageBlock = document.createElement('div');
+  const image = document.createElement('img');
+  image.src = selectedPhoto;
+  imageBlock.appendChild(image);
+  imageBlock.classList.add('photo-choisie');
+  const allImages = document.getElementById('photos');
+  allImages.insertBefore(imageBlock, allImages.firstChild);
+}
+
+newTirage();

@@ -1,37 +1,37 @@
 #map {
-    height: 500px;
-  }
-  
-  .photo-choisie {
-    max-width: 300px;
-    max-height: 300px;
-    display: block;
-    margin: auto;
-    padding: 2.0em;
-  }
+  height: 500px;
+}
 
-#photos{
+.photo-choisie {
+  max-height: 300px;
+  display: block;
+  margin: auto;
+  padding: 2.0em;
+}
+
+#photos {
   display: flex;
   overflow: auto;
-  flex-direction: row-reverse;}
+  flex-direction: row-reverse;
+}
 
-  h1 {
-    color: rgb(252, 255, 255);
-    font-family: "Playwrite ES", cursive;
-    background: linear-gradient(45deg, rgb(40, 27, 160), rgb(48, 195, 221) 75%, rgb(29, 253, 216));
-    font-size: 2em;
+h1 {
+  color: rgb(252, 255, 255);
+  font-family: "Playwrite ES", cursive;
+  background: linear-gradient(45deg, rgb(40, 27, 160), rgb(48, 195, 221) 75%, rgb(29, 253, 216));
+  font-size: 2em;
 }
 
 p {
-    font-family: "Dosis", sans-serif;
-    font-size: 1.1em;
-    color: rgb(20, 15, 59)
+  font-family: "Dosis", sans-serif;
+  font-size: 1.1em;
+  color: rgb(20, 15, 59)
 }
 
 h2 {
-    font-size: 1.5em;
-    font-family: "Playwrite ES", cursive;
-    text-decoration: underline;
+  font-size: 1.5em;
+  font-family: "Playwrite ES", cursive;
+  text-decoration: underline;
 }
 
 ul {
@@ -48,6 +48,9 @@ ul {
   padding-right: 10px;
   grid-column: 1;
   grid-row: 2 / span 3;
- 
+
 }
 
+img {
+  height: 300px;
+}
