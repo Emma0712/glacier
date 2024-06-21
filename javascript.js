@@ -1,3 +1,4 @@
+/*
 let tirageAleatoire = Math.random();
 console.log(tirageAleatoire);
 
@@ -23,3 +24,5 @@ while (jeuContinue) {
     }
 
 }
+
+/** */

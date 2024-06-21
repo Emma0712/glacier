@@ -4,19 +4,25 @@ const map = L.map('map').setView([47.29, 2.77], 5);
 
 // add orthophotos layer
 
+const layer = "ORTHOIMAGERY.ORTHOPHOTOS";
+const format = "image/jpeg";
+
+const layerAncien = "ORTHOIMAGERY.ORTHOPHOTOS.1950-1965";
+const formatAncien = "image/png";
+
 L.tileLayer(
     "https://data.geopf.fr/wmts?" +
     "&REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0" +
     "&STYLE=normal" +
     "&TILEMATRIXSET=PM" +
-    "&FORMAT=image/jpeg" +
-    "&LAYER=ORTHOIMAGERY.ORTHOPHOTOS" +
+    "&FORMAT=" + format +
+    "&LAYER=" + layer +
     "&TILEMATRIX={z}" +
     "&TILEROW={y}" +
     "&TILECOL={x}",
     {
         minZoom: 0,
-        maxZoom: 18,
+        maxZoom: 19,
         attribution: "IGN-F/Geoportail",
         tileSize: 256 // les tuiles du Géooportail font 256x256px
     }
@@ -25,24 +31,61 @@ L.tileLayer(
 // load geojson data
 // L.geoJSON(GEOPHOTO_DATA).addTo(map);
 let photos = [];
+let coordinates = [];
 L.geoJSON(GEOPHOTO_DATA, {
     onEachFeature: (feature) => {
+        console.log(feature);
         const photo = feature.properties.photo;
+        const coordinate = [
+            feature.geometry.coordinates[1],
+            feature.geometry.coordinates[0],
+        ];
         if (photo) {
             photos.push(photo);
+            coordinates.push(coordinate);
         }
     }
 });
 
-console.log(photos);
+// console.log(photos);
 
-let tirage = Math.random() * (photos.length - 1)
-tirage = Math.round(tirage);
 
-let selectedPhoto = photos[tirage];
-console.log(selectedPhoto);
 
-const image = document.createElement('img');
-image.src = selectedPhoto;
-image.classList.add('photo-choisie');
-document.body.appendChild(image);
+map.on('click', (event) => {
+    console.log('click', event, event.latlng);
+    var marker = L.marker(selectedCoordinates).addTo(map);
+
+    const coordinateClick = [event.latlng.lat, event.latlng.lng];
+    var markerClick = L.circle(coordinateClick, { color: 'red', radius: 10 }).addTo(map);
+
+    const latlngs = [selectedCoordinates, coordinateClick];
+
+    let polyline = L.polyline(latlngs, { color: 'red' }).addTo(map);
+
+    nouveauTirage();
+});
+
+
+let tirage;
+let selectedPhoto;
+let selectedCoordinates;
+
+
+let listephoto = document.getElementById("photos");
+
+const nouveauTirage = () => {
+
+    tirage = Math.random() * (photos.length - 1)
+    tirage = Math.round(tirage);
+
+    selectedPhoto = photos[tirage];
+    selectedCoordinates = coordinates[tirage];
+    console.log(selectedPhoto, selectedCoordinates);
+
+    const image = document.createElement('img');
+    image.src = selectedPhoto;
+    image.classList.add('photo-choisie');
+    listephoto.appendChild(image);
+}
+
+nouveauTirage();
