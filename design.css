@@ -1,0 +1,35 @@
+#map {
+    height: 500px;
+  }
+  
+  .photo-choisie {
+    max-width: 300px;
+    max-height: 300px;
+    display: block;
+    margin: auto;
+    padding: 2.0em;
+  }
+
+  h1 {
+    color: rgb(252, 255, 255);
+    font-family: "Playwrite ES", cursive;
+    background: linear-gradient(45deg, rgb(40, 27, 160), rgb(48, 195, 221) 75%, rgb(29, 253, 216));
+    font-size: 2em;
+}
+
+#menu {
+    width: 280px;
+    height: 140px;
+    border: solid 2px rgb(27, 64, 231);
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow: 1px 1px 2px black;
+    grid-column: 1;
+
+    grid-row: 2 / span 3;
+}
+
+html {
+    background: linear-gradient(45deg, rgb(255, 255, 255), rgb(230, 244, 247) 75%, rgb(255, 255, 255));
+}
